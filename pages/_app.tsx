@@ -1,8 +1,14 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+import TodoContextProvider from "../store/store-todo";
 
-export default MyApp
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  return (
+    <TodoContextProvider>
+      <Component {...pageProps} />
+    </TodoContextProvider>
+  );
+};
+
+export default MyApp;
