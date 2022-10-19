@@ -1,9 +1,22 @@
 import TodoModel from "../../models/todo";
 const baseUrl: string = "http://localhost:3001";
 
+export const getTodosAPI = async () => {
+  try {
+    const response = await fetch(baseUrl + `/todos`);
+
+    const data = await response.json();
+    console.log("data", data);
+
+    return data;
+  } catch (error) {
+    throw new Error("Cannot get Todos");
+  }
+};
+
 export const addTodosAPI = async (todos: TodoModel) => {
   try {
-    const response = await fetch(baseUrl + "/todos", {
+    const response = await fetch(baseUrl + `/todos`, {
       method: "POST",
       body: JSON.stringify({ ...todos }),
       headers: {
@@ -30,7 +43,7 @@ export const removeTodoAPI = async (id: string) => {
 
 export const editTodoAPI = async (id: string, updateText: string) => {
   try {
-    const response = await fetch(`http://localhost:3001/todos/${id}`, {
+    const response = await fetch(baseUrl + `/todos/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ title: updateText }),
     });
@@ -45,24 +58,11 @@ export const editTodoAPI = async (id: string, updateText: string) => {
 
 export const checkTodoAPI = async (id: string, updateComplete: boolean) => {
   try {
-    const response = await fetch(`http://localhost:3001/todos/${id}`, {
+    const response = await fetch(baseUrl + `/todos/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ completed: updateComplete }),
     });
   } catch (error) {
     throw new Error("Updating Todo Fail");
-  }
-};
-
-export const getTodosAPI = async () => {
-  try {
-    const response = await fetch(`http://localhost:3001/todos`);
-
-    const data = await response.json();
-    console.log("data", data);
-
-    return data;
-  } catch (error) {
-    throw new Error("Cannot get Todos");
   }
 };

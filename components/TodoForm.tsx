@@ -4,8 +4,6 @@ import { TodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 
 const TodoForm = () => {
-  const [loading, setLoading] = useState(false);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const todoCtx = useContext(TodoContext);
