@@ -1,26 +1,24 @@
-import React, { useState, useRef, useContext } from "react";
-import TodoModel from "../models/todo";
+import React, { useRef, useContext } from "react";
+import { AddTodo } from "../models/todo";
 import { TodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 
 const TodoForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const todoCtx = useContext(TodoContext);
-  const addTodo = todoCtx.addTodo;
+  const { addTodo } = useContext(TodoContext);
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    const newTodo: TodoModel = {
-      id: new Date().getTime().toString(),
+
+    if (inputRef.current?.value == "") {
+      return;
+    }
+    const Addtodo = {
       title: inputRef.current!.value,
       completed: false,
     };
 
-    if (newTodo.title.trim() === "") {
-      return;
-    }
-    addTodo(newTodo);
+    addTodo(Addtodo);
 
     inputRef.current!.value = "";
   };

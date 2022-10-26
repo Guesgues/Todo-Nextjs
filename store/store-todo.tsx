@@ -4,17 +4,17 @@ import {
   removeTodoAPI,
   editTodoAPI,
   checkTodoAPI,
+  addTodosAPI,
 } from "../pages/api/todoApi";
 
-import TodoModel, { filter } from "../models/todo";
+import TodoModel, { filter, AddTodo } from "../models/todo";
 
 interface TodoContextInterface {
-  test: string;
   todoList: TodoModel[];
-  filter: filter;
+  Filter: filter;
   changeFilter: (filterOrder: filter) => void;
   getTodo: () => void;
-  addTodo: (todo: TodoModel) => void;
+  addTodo: (todo: AddTodo) => void;
   removeTodo: (id: string) => void;
   checkTodo: (id: string) => void;
   updateTodo: (id: string, textInput: string) => void;
@@ -25,12 +25,11 @@ type Props = {
 };
 
 export const TodoContext = createContext<TodoContextInterface>({
-  test: "",
   todoList: [],
-  filter: filter.all,
+  Filter: filter.all,
   changeFilter: (filterOrder: filter) => {},
   getTodo: () => {},
-  addTodo: (todo: TodoModel) => {},
+  addTodo: (todo: AddTodo) => {},
   removeTodo: (id: string) => {},
   checkTodo: (id: string) => {},
   updateTodo: (id: string, textInput: string) => {},
@@ -41,22 +40,23 @@ const TodoContextProvider = (props: Props) => {
   const [filterOrder, setFilterOrder] = useState<filter>(filter.all);
 
   const changeFilterHandler = (filterOrder: filter) => {
-    console.log("test", filterOrder);
     setFilterOrder(filterOrder);
   };
 
   const getTodoHandler = async () => {
-    // console.log("todo");
     const loadedTodos = await getTodosAPI();
     setTodos(loadedTodos);
   };
 
-  const addTodoHandler = async (todos: TodoModel) => {
-    const newTodo: TodoModel = {
-      ...todos,
-    };
+  const addTodoHandler = async (todos: AddTodo) => {
+    const loadedTodos = await addTodosAPI({
+      title: todos.title,
+      completed: todos.completed,
+    });
+    console.log("add", loadedTodos);
+
     setTodos((prevTodos) => {
-      return prevTodos.concat(newTodo);
+      return prevTodos.concat(loadedTodos);
     });
   };
 
@@ -88,9 +88,8 @@ const TodoContextProvider = (props: Props) => {
   };
 
   const todoContextValue: TodoContextInterface = {
-    test: "hello world",
     todoList: todos,
-    filter: filterOrder,
+    Filter: filterOrder,
     changeFilter: changeFilterHandler,
     getTodo: getTodoHandler,
     addTodo: addTodoHandler,

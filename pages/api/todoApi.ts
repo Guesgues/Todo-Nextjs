@@ -1,5 +1,6 @@
-import TodoModel from "../../models/todo";
-const baseUrl: string = "http://localhost:3001";
+import {AddTodo} from "../../models/todo";
+
+const baseUrl: string = process.env.NEXT_PUBLIC_API_URL!;
 
 export const getTodosAPI = async () => {
   try {
@@ -14,7 +15,7 @@ export const getTodosAPI = async () => {
   }
 };
 
-export const addTodosAPI = async (todos: TodoModel) => {
+export const addTodosAPI = async (todos:AddTodo) => {
   try {
     const response = await fetch(baseUrl + `/todos`, {
       method: "POST",
@@ -45,6 +46,9 @@ export const editTodoAPI = async (id: string, updateText: string) => {
   try {
     const response = await fetch(baseUrl + `/todos/${id}`, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ title: updateText }),
     });
 
@@ -60,6 +64,9 @@ export const checkTodoAPI = async (id: string, updateComplete: boolean) => {
   try {
     const response = await fetch(baseUrl + `/todos/${id}`, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ completed: updateComplete }),
     });
   } catch (error) {

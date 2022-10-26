@@ -1,22 +1,12 @@
 .container {
+  position: absolute;
   padding: 0 2rem;
   width: 720px;
   height: auto;
   min-height: 620px;
   background: #f5f5f5;
   border-radius: 20px;
-  margin: 42px auto auto auto;
-}
-
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #e5e5e5;
+  margin: 42px auto auto 30%;
 }
 
 .todo_item {
@@ -31,13 +21,12 @@
   margin: 17px auto auto auto;
 }
 
-.todo_item_completed .title {
+.todo-item_completed .title {
   color: #a9a9a9;
   text-decoration: line-through #a9a9a9;
 }
 
 .todolist {
-  margin: auto auto auto 16px;
   border: 0;
   border-color: #ffffff;
 }
@@ -54,7 +43,7 @@
 }
 
 .title {
-  margin: 0;
+  margin: 14px auto auto 16px;
   line-height: 1.15;
 }
 
@@ -71,14 +60,16 @@
   background: transparent;
   font-size: 16px;
   width: 400px;
-  margin: auto auto auto 20px;
+  margin: 14px auto auto 20px;
 }
 
 .checktodo {
-  background: #585292;
+  accent-color: #585292;
   border: 2px solid #585292;
   border-radius: 6px;
-  margin: 12px o 12px 20px;
+  margin: 12px auto auto 20px;
+  width: 22px;
+  height: 22px;
 }
 
 @media (max-width: 600px) {
@@ -103,21 +94,29 @@
 
 /* progressbar */
 .progressbox {
-  position: relative;
   width: 518px;
   height: 123px;
   background: #e07c7c;
   border-radius: 20px;
-  margin: auto;
+  margin: 61px auto auto auto;
 }
 
 .progressbar {
   width: 480px;
   height: 7.34px;
   margin: auto;
-  background: #3b3b3b;
+  background-color: #3b3b3b;
   border-radius: 999px;
-  accent-color: #ffffff;
+}
+
+.progressbar::-webkit-progress-bar {
+  background-color: #3b3b3b;
+  border-radius: 999px;
+}
+
+.progressbar::-webkit-progress-value {
+  background-color: #fff;
+  border-radius: 999px;
 }
 
 .progresstext {
@@ -125,6 +124,7 @@
   font-size: 16px;
   line-height: 19px;
   color: #ebb9b8;
+  margin-top: 12.66px;
 }
 
 .progresstitle {
@@ -132,21 +132,22 @@
   font-size: 28px;
   line-height: 33px;
   color: #ffffff;
+  margin: auto;
 }
 
 .progressgroup {
+  position: absolute;
   margin: 19px auto auto 19px;
 }
 
 /* dropdrow */
 .drop {
-  margin: auto;
   float: right;
   border: none;
   color: #9796a8;
   list-style-type: none;
   font-size: 2em;
-  margin: auto 19.6px auto auto;
+  margin: auto 19.6px 20.6px auto;
 }
 
 .drop:hover {
@@ -218,71 +219,21 @@
 }
 
 /* filter */
-a.active {
-  color: #fff;
+.texttask {
+  font-weight: 500;
+  font-size: 24px;
+  margin: auto 345px auto 81px;
 }
 .filter {
-  padding: 15px;
-  margin: 15px auto;
-  width: 100px;
-  border: none;
-  background: #9b59b6;
-  color: #fff;
-  border-radius: 7px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  list-style-type: none;
-}
-
-.filter:hover {
-  background: #a06fb4;
-  cursor: pointer;
-}
-
-.icon {
-  border: solid white;
-  margin-left: 5px;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  text-align: end;
-}
-
-.selectfilter {
-  z-index: -1;
-  position: absolute;
-  visibility: hidden;
-  opacity: 0;
-  color: black;
-  background: #e1e6ea;
-  width: 200px;
-  margin-top: 20px;
-  margin-left: -15px;
-  transition: all 0.3s ease;
-  border-radius: 0px 0px 7px 7px;
-  transform: translateY(15px);
-  cursor: default;
-}
-
-.item {
-  display: block;
-  text-align: left;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  text-transform: capitalize;
-  padding: 10px 15px;
-  transition: all 0.3s ease;
+  background: #ffffff;
+  border-radius: 10px;
+  width: 110px;
+  height: 29px;
+  margin: 33px auto 16px auto;
 }
 
 .item:hover {
-  font-size: 18px;
-  background: #d4dade;
-}
-
-.item:last-of-type {
-  border-radius: 0px 0px 7px 7px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #f3969a;
 }

@@ -1,23 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { TodoContext } from "../store/store-todo";
-import classes from "../styles/Home.module.css";
+import classes from "styles/Home.module.css";
+
 
 const ProgressBar = () => {
-  const todoCtx = useContext(TodoContext);
+  const { todoList } = useContext(TodoContext);
 
-  const todoList = todoCtx.todoList;
+  const countDone = useMemo(() => {
+    let done = todoList.filter((item) => item.completed === true).length;
+    return done;
+  }, [todoList]);
+
   return (
     <div className={classes.progressbox}>
       <div className={classes.progressgroup}>
         <div className={classes.progresstitle}>Progress</div>
         <progress
           className={classes.progressbar}
-          value={todoList.filter((item) => item.completed === true).length}
+          value={countDone}
           max={todoList.length}
         ></progress>
-        <div className={classes.progresstext}>
-          {todoList.filter((item) => item.completed === true).length} completed
-        </div>
+        <div className={classes.progresstext}>{countDone} completed</div>
       </div>
     </div>
   );

@@ -4,6 +4,11 @@ interface TodoModel {
   completed: boolean;
 }
 
+export type AddTodo = {
+  title: string;
+  completed: boolean;
+};
+
 export enum filter {
   all = "all",
   done = "done",

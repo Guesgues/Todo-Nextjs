@@ -1,32 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { TodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 import TodoDetails from "./TodoDetails";
 import { filter } from "../models/todo";
 
 const TodoList = () => {
-  const todoCtx = useContext(TodoContext);
-
-  const todoList = todoCtx.todoList;
-  const getTodo = todoCtx.getTodo;
-  const filterOrder = todoCtx.filter;
+  const { todoList, getTodo, Filter } = useContext(TodoContext);
 
   useEffect(() => {
+    let cleanfunc = true;
     getTodo();
+    return function cleanup() {
+      cleanfunc = false;
+    };
   }, []);
 
   const allTodos =
-    filterOrder === filter.all &&
+    Filter === filter.all &&
     todoList.map((todos) => <TodoDetails key={todos.id} todos={todos} />);
 
   const completedTodos =
-    filterOrder === filter.done &&
+    Filter === filter.done &&
     todoList
       .filter((todos) => todos.completed === true)
       .map((todos) => <TodoDetails key={todos.id} todos={todos} />);
 
   const activeTodos =
-    filterOrder === filter.undone &&
+    Filter === filter.undone &&
     todoList
       .filter((todos) => todos.completed === false)
       .map((todos) => <TodoDetails key={todos.id} todos={todos} />);
