@@ -1,4 +1,4 @@
-import {AddTodo} from "../../models/todo";
+import { AddTodo } from "../../models/todo";
 
 const baseUrl: string = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -7,7 +7,6 @@ export const getTodosAPI = async () => {
     const response = await fetch(baseUrl + `/todos`);
 
     const data = await response.json();
-    console.log("data", data);
 
     return data;
   } catch (error) {
@@ -15,7 +14,7 @@ export const getTodosAPI = async () => {
   }
 };
 
-export const addTodosAPI = async (todos:AddTodo) => {
+export const addTodosAPI = async (todos: AddTodo) => {
   try {
     const response = await fetch(baseUrl + `/todos`, {
       method: "POST",
@@ -53,8 +52,6 @@ export const editTodoAPI = async (id: string, updateText: string) => {
     });
 
     const data = await response.json();
-
-    console.log(response);
   } catch (error) {
     throw new Error("Updating Todo Fail");
   }

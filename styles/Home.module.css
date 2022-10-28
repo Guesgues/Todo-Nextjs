@@ -52,7 +52,7 @@
   text-align: center;
 }
 
-.input {
+.inputtodo {
   outline: none;
   border: 0;
   width: 100%;
@@ -231,9 +231,13 @@
   height: 29px;
   margin: 33px auto 16px auto;
 }
+.item {
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
 
 .item:hover {
-  text-decoration: none;
-  color: #ffffff;
-  background-color: #f3969a;
+  background: #585292;
+  border-radius: 8px;
 }

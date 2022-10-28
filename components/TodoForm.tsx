@@ -26,7 +26,7 @@ const TodoForm = () => {
     <div className={classes.todo_item}>
       <form onSubmit={submitHandler}>
         <input
-          className={classes.input}
+          className={classes.inputtodo}
           type="text"
           placeholder="Add your todo..."
           ref={inputRef}

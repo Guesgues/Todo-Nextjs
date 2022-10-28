@@ -53,7 +53,6 @@ const TodoContextProvider = (props: Props) => {
       title: todos.title,
       completed: todos.completed,
     });
-    console.log("add", loadedTodos);
 
     setTodos((prevTodos) => {
       return prevTodos.concat(loadedTodos);

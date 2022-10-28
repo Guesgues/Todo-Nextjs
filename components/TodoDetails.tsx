@@ -14,7 +14,6 @@ const TodoDetails = ({ todos }: TodoDetailsProps) => {
   const { removeTodo, checkTodo, updateTodo } = useContext(TodoContext);
 
   const removeTodoHanlder = () => {
-    console.log("todo", todos);
     removeTodo(todos.id);
   };
 

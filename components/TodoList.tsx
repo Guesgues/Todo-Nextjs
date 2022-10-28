@@ -9,7 +9,10 @@ const TodoList = () => {
 
   useEffect(() => {
     let cleanfunc = true;
-    getTodo();
+    if (cleanfunc) {
+      getTodo();
+    }
+
     return function cleanup() {
       cleanfunc = false;
     };
