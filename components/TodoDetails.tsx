@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useMemo, useState } from "react";
 import TodoModel from "../models/todo";
-import { TodoContext } from "../store/store-todo";
+import { useTodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 import classNames from "classnames";
 
@@ -10,19 +10,20 @@ interface TodoDetailsProps {
 const TodoDetails = ({ todos }: TodoDetailsProps) => {
   const [todoText, setTodoText] = useState<string>(todos.title);
   const [editing, setEditing] = useState<boolean>(false);
+  const { id, completed } = todos;
 
-  const { removeTodo, checkTodo, updateTodo } = useContext(TodoContext);
+  const { removeTodo, checkTodo, updateTodo } = useTodoContext();
 
   const removeTodoHanlder = () => {
-    removeTodo(todos.id);
+    removeTodo(id);
   };
 
   const checkTodoHandler = () => {
-    checkTodo(todos.id);
+    checkTodo(id);
   };
 
   const saveEditTodoHandler = () => {
-    updateTodo(todos.id, todoText);
+    updateTodo(id, todoText);
     setEditing(false);
   };
 
@@ -33,11 +34,17 @@ const TodoDetails = ({ todos }: TodoDetailsProps) => {
       return;
     }
   };
-  const todo_completed = todos.completed ? classes["todo-item_completed"] : "";
+  const todo_completed = useMemo(() => {
+    return completed ? classes["todo-item_completed"] : "";
+  }, [completed]);
 
-  const todo_editing = editing ? classes["todo-item_editing"] : "";
+  const todo_editing = useMemo(() => {
+    return editing ? classes["todo-item_editing"] : "";
+  }, [editing]);
 
-  const hide = editing ? classes.hide : "";
+  const hide = useMemo(() => {
+    return editing ? classes.hide : "";
+  }, [editing]);
 
   return (
     <div
@@ -47,7 +54,7 @@ const TodoDetails = ({ todos }: TodoDetailsProps) => {
         <input
           className={classNames(classes.checktodo, hide)}
           type="checkbox"
-          checked={todos.completed}
+          checked={completed}
           onChange={() => checkTodoHandler()}
         />
       </div>
@@ -55,7 +62,7 @@ const TodoDetails = ({ todos }: TodoDetailsProps) => {
         {editing ? (
           <input
             onKeyPress={onEnterPressHandler}
-            className={classes.input}
+            className={classes.inputtodo}
             type="text"
             value={todoText}
             onChange={(e) => setTodoText(e.target.value)}
@@ -75,7 +82,7 @@ const TodoDetails = ({ todos }: TodoDetailsProps) => {
           </a>
           <a
             className={classNames(classes.drop_link, hide, classes.btdelete)}
-            onClick={removeTodoHanlder.bind(null, todos.id)}
+            onClick={removeTodoHanlder.bind(null, todos)}
           >
             Delete
           </a>

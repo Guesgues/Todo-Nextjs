@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import {
   getTodosAPI,
   removeTodoAPI,
@@ -34,6 +34,10 @@ export const TodoContext = createContext<TodoContextInterface>({
   checkTodo: (id: string) => {},
   updateTodo: (id: string, textInput: string) => {},
 });
+
+export const useTodoContext = () => {
+  return useContext(TodoContext);
+};
 
 const TodoContextProvider = (props: Props) => {
   const [todos, setTodos] = useState<TodoModel[]>([]);

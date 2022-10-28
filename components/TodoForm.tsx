@@ -1,11 +1,11 @@
 import React, { useRef, useContext } from "react";
 import { AddTodo } from "../models/todo";
-import { TodoContext } from "../store/store-todo";
+import { useTodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 
 const TodoForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { addTodo } = useContext(TodoContext);
+  const { addTodo } = useTodoContext();
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();

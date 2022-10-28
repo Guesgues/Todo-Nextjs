@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { TodoContext } from "../store/store-todo";
+import { useTodoContext } from "../store/store-todo";
 import classes from "../styles/Home.module.css";
 import TodoDetails from "./TodoDetails";
 import { filter } from "../models/todo";
 
 const TodoList = () => {
-  const { todoList, getTodo, Filter } = useContext(TodoContext);
+  const { todoList, getTodo, Filter } = useTodoContext();
 
   useEffect(() => {
     let cleanfunc = true;

@@ -1,9 +1,9 @@
-import React, { useContext, useMemo } from "react";
-import { TodoContext } from "../store/store-todo";
+import React, { useMemo } from "react";
+import { useTodoContext } from "../store/store-todo";
 import classes from "styles/Home.module.css";
 
 const ProgressBar = () => {
-  const { todoList } = useContext(TodoContext);
+  const { todoList } = useTodoContext();
 
   const countDone = useMemo(() => {
     let done = todoList.filter((item) => item.completed).length;

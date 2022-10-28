@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import classes from "../styles/Home.module.css";
-import { TodoContext } from "../store/store-todo";
+import { useTodoContext } from "../store/store-todo";
 import { filter } from "../models/todo";
 import classNames from "classnames";
 
 const TaskFilters = () => {
-  const { changeFilter, Filter } = useContext(TodoContext);
+  const { changeFilter, Filter } = useTodoContext();
 
   const changeFilterOrder = (filter: filter) => {
     changeFilter(filter);
@@ -17,12 +17,16 @@ const TaskFilters = () => {
       <select
         className={classes.filter}
         onChange={(e) => {
-          if (e.target.value == "all") {
-            changeFilterOrder(filter.all);
-          } else if (e.target.value == "done") {
-            changeFilterOrder(filter.done);
-          } else if (e.target.value == "undone") {
-            changeFilterOrder(filter.undone);
+          switch (e.target.value) {
+            case "all":
+              changeFilterOrder(filter.all);
+              break;
+            case "done":
+              changeFilterOrder(filter.done);
+              break;
+            case "undone":
+              changeFilterOrder(filter.undone);
+              break;
           }
         }}
       >
